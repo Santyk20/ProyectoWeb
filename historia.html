@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia — Brian Mix &amp; Martini's</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- Barra de navegacion superior -->
+  <header class="barrasup">
+    <a href="index.html" class="logo-link">
+      <img src="./img/brian-mix-martinis-logo.png" alt="Logo" class="nav-logo">
+    </a>
+
+    <nav id="menuDesplegable" class="menu-desplegable">
+      <a href="servicios.html" class="nav-item">Servicios</a>
+      <a href="historia.html" class="nav-item active">Historia</a>
+      <a href="PDLV.html" class="nav-item">PDLV</a>
+    </nav>
+
+    <div class="acciones-header">
+      <div id="bloqueBotonesUsuario" class="usuario">
+        <button type="button" class="btn-user btn-login" onclick="abrirModalAuth('login')">Iniciar sesión</button>
+        <button type="button" class="btn-user btn-register" onclick="abrirModalAuth('registro')">Registrarse</button>
+      </div>
+
+      <div id="bloqueSesionActiva" class="sesion-activa" style="display: none;">
+        <span id="nombreUsuarioActivo" class="saludo-usuario">🍸 Hola, brian</span>
+        <button type="button" class="btn-user btn-logout" onclick="cerrarSesion()">Salir</button>
+      </div>
+
+      <button type="button" id="btnHamburguesa" class="btn-hamburguesa" onclick="alternarMenuMovil()">☰</button>
+    </div>
+  </header>
+
+  <!-- Modal simple de Login y Registro -->
+  <div id="modalAuth" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h3 id="tituloModalAuth">Iniciar Sesión</h3>
+      <input type="text" id="inputAuthUsuario" class="input-simple" placeholder="Usuario (ej: brian)">
+      <input type="password" id="inputAuthPassword" class="input-simple" placeholder="Contraseña (ej: martini)">
+      <p id="mensajeModalAuth" class="auth-mensaje"></p>
+      <div class="modal-botones">
+        <button type="button" id="btnSubmitLogin" class="btn-rojo" onclick="procesarLogin()">Entrar</button>
+        <button type="button" id="btnSubmitRegistro" class="btn-rojo" onclick="procesarRegistro()" style="display: none;">Crear Cuenta</button>
+        <button type="button" class="btn-gris" onclick="cerrarModalAuth()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <main class="contenedor-pagina">
+    <h1 class="titulo-seccion">La Historia de Brian Griffin</h1>
+
+    <!-- Biografia en 3 columnas simples -->
+    <section class="caja-historia">
+      <div class="columna-historia">
+        <p>Mientras otros aprendían a presionar botones en programas piratas, yo pasé mis años formativos estudiando psicoacústica y física de ondas. Desde el día uno entendí la diferencia entre hacer ruido y crear arte.</p>
+      </div>
+
+      <div class="columna-foto-formal">
+        <img src="./img/BrianFormal.jpg" alt="Brian Formal">
+      </div>
+
+      <div class="columna-historia">
+        <p>Hoy divido mi tiempo entre escribir mi próxima novela, disfrutar un martini y rescatar a la industria musical. Examino tus pistas con un solo objetivo: erradicar la compresión vulgar y devolverle la elegancia al audio.</p>
+      </div>
+    </section>
+
+    <!-- Galeria de 4 fotos (Carrusel en celular) -->
+    <section class="seccion-bloque">
+      <h2 class="subtitulo-seccion">Sesiones en el Estudio</h2>
+      <div class="galeria-fotos">
+        <div id="slideHistoria0" class="slide-carrusel activo-movil">
+          <div class="tarjeta-foto">
+            <img src="./img/BrianWorking.jpeg" alt="Brian trabajando">
+            <p>Escribiendo la Novela</p>
+          </div>
+        </div>
+        <div id="slideHistoria1" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-foto">
+            <img src="./img/BrianConsola.jpeg" alt="Brian en consola">
+            <p>Calibración Analógica</p>
+          </div>
+        </div>
+        <div id="slideHistoria2" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-foto">
+            <img src="./img/BrianEscuchandoMusica.jpeg" alt="Brian escuchando musica">
+            <p>Audición Crítica</p>
+          </div>
+        </div>
+        <div id="slideHistoria3" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-foto">
+            <img src="./img/BrianPoeta.jpeg" alt="Brian poeta">
+            <p>El Poeta Incomprendido</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controles-carrusel-movil">
+        <button type="button" class="btn-rojo" onclick="cambiarSlideHistoria(-1)">◀ Anterior</button>
+        <span id="contadorCarruselHistoria">1 / 4</span>
+        <button type="button" class="btn-rojo" onclick="cambiarSlideHistoria(1)">Siguiente ▶</button>
+      </div>
+    </section>
+
+    <!-- Opiniones con Martinis -->
+    <section class="seccion-bloque">
+      <h2 class="subtitulo-seccion">Lo que dicen de mí</h2>
+      <div class="lista-opiniones">
+        <div class="tarjeta-opinion">
+          <img src="./img/PeterGriffin.png" alt="Peter Griffin">
+          <div>
+            <strong>Peter Griffin — 🍸🍸🍸🍸🍸</strong>
+            <p>"Brian me dijo que mi canción para la cerveza Pawtucket hacía llorar a los ángeles. ¡Le doy 5 martinis!"</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-opinion">
+          <img src="./img/LoisGriffin.png" alt="Lois Griffin">
+          <div>
+            <strong>Lois Griffin — 🍸🍸🍸🍸</strong>
+            <p>"Le pedí a Brian que limpiara el audio del recital de piano de Stewie y quitó el silbido de fondo."</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-opinion">
+          <img src="./img/Stewie_Griffin.png" alt="Stewie Griffin">
+          <div>
+            <strong>Stewie Griffin — 🍸🍸🍸</strong>
+            <p>"Igual corregí la fase de mi pista... solo para demostrar que él estaba equivocado."</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-opinion">
+          <img src="./img/Meg_Griffin.png" alt="Meg Griffin">
+          <div>
+            <strong>Meg Griffin — 🍸</strong>
+            <p>"Le subí mi canción y solo me mandó un audio tomándose un martini y diciendo que me dedique a otra cosa."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer con datos esenciales -->
+  <footer class="footer-estudio">
+    <div class="footer-columnas">
+      <div class="footer-col">
+        <h4>Brian Mix &amp; Martini's</h4>
+        <p class="footer-bio">Estudio de auditoría acústica analógica y críticas sin anestesia en Quahog.</p>
+        <p class="footer-lema">"El sonido culto se bebe frío y con dos aceitunas."</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Secciones</h4>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="historia.html">Historia</a>
+        <a href="PDLV.html">PDLV</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto &amp; Horarios</h4>
+        <p>📍 Spooner Street 31, Quahog, Rhode Island</p>
+        <p>📧 contacto@brianmixmartinis.com</p>
+        <p>📞 Tel: +1 (401) 555-0199 | 🍸 Lun a Vie 14 a 20 hs</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Brian Mix &amp; Martini's Studio. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="./funciones.js"></script>
+</body>
+</html>

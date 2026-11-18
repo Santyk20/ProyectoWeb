@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios — Brian Mix &amp; Martini's</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- Barra de navegacion superior -->
+  <header class="barrasup">
+    <a href="index.html" class="logo-link">
+      <img src="./img/brian-mix-martinis-logo.png" alt="Logo" class="nav-logo">
+    </a>
+
+    <nav id="menuDesplegable" class="menu-desplegable">
+      <a href="servicios.html" class="nav-item active">Servicios</a>
+      <a href="historia.html" class="nav-item">Historia</a>
+      <a href="PDLV.html" class="nav-item">PDLV</a>
+    </nav>
+
+    <div class="acciones-header">
+      <div id="bloqueBotonesUsuario" class="usuario">
+        <button type="button" class="btn-user btn-login" onclick="abrirModalAuth('login')">Iniciar sesión</button>
+        <button type="button" class="btn-user btn-register" onclick="abrirModalAuth('registro')">Registrarse</button>
+      </div>
+
+      <div id="bloqueSesionActiva" class="sesion-activa" style="display: none;">
+        <span id="nombreUsuarioActivo" class="saludo-usuario">🍸 Hola, brian</span>
+        <button type="button" class="btn-user btn-logout" onclick="cerrarSesion()">Salir</button>
+      </div>
+
+      <button type="button" id="btnHamburguesa" class="btn-hamburguesa" onclick="alternarMenuMovil()">☰</button>
+    </div>
+  </header>
+
+  <!-- Modal simple de Login y Registro -->
+  <div id="modalAuth" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h3 id="tituloModalAuth">Iniciar Sesión</h3>
+      <input type="text" id="inputAuthUsuario" class="input-simple" placeholder="Usuario (ej: brian)">
+      <input type="password" id="inputAuthPassword" class="input-simple" placeholder="Contraseña (ej: martini)">
+      <p id="mensajeModalAuth" class="auth-mensaje"></p>
+      <div class="modal-botones">
+        <button type="button" id="btnSubmitLogin" class="btn-rojo" onclick="procesarLogin()">Entrar</button>
+        <button type="button" id="btnSubmitRegistro" class="btn-rojo" onclick="procesarRegistro()" style="display: none;">Crear Cuenta</button>
+        <button type="button" class="btn-gris" onclick="cerrarModalAuth()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <main class="contenedor-pagina">
+    <h1 class="titulo-seccion">La Opinión de Brian</h1>
+
+    <!-- Simulador de Medidor LUFS -->
+    <section class="caja-simulador">
+      <div class="columna-onda">
+        <strong id="estadoSenal">⚠️ Compresión severa detectada (-4 LUFS)</strong>
+        <img id="imagenSenal" src="./img/Waveform_Ejemplo.png" alt="Forma de onda" class="img-onda">
+        <div class="fila-input">
+          <input type="number" id="inputLufs" class="input-simple" value="-4" placeholder="Ej: -14">
+          <button type="button" class="btn-rojo" onclick="evaluarNivelLufs()">Medir LUFS</button>
+        </div>
+      </div>
+
+      <div class="columna-brian-juez">
+        <img id="imagenBrianServicio" src="./img/Brian_Jugzando_Recorte.png" alt="Brian evaluando" class="img-brian-juez">
+        <div id="cajaVeredictoServicio" class="caja-veredicto-lufs">
+          <strong id="tituloVeredictoServicio">Veredicto de Brian:</strong>
+          <p id="textoVeredictoServicio">"No escuchaba semejante aberración armónica desde el concierto de Quagmire."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Herramientas de Diagnostico (Carrusel en celular) -->
+    <section class="seccion-bloque">
+      <h2 class="subtitulo-seccion">Herramientas de Diagnóstico Profesional</h2>
+
+      <div class="grilla-herramientas">
+        <div id="slideServicios0" class="slide-carrusel activo-movil">
+          <div class="tarjeta-herramienta">
+            <h3>01. ANALIZADOR</h3>
+            <img src="./img/Analizador.png" alt="Analizador">
+            <p>Inspecciona el balance tonal de 20 Hz a 20 kHz para detectar excesos de graves o agudos.</p>
+            <button type="button" class="btn-rojo" onclick="agregarHerramienta('Analizador de Espectro', 2)">+ Sumar (2 Martinis 🍸)</button>
+          </div>
+        </div>
+
+        <div id="slideServicios1" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-herramienta">
+            <h3>02. LUFS METER</h3>
+            <img src="./img/LUFS.png" alt="LUFS">
+            <p>Mide el volumen integrado y el rango dinámico real para evitar la sobrecompresión.</p>
+            <button type="button" class="btn-rojo" onclick="agregarHerramienta('Medidor LUFS', 1)">+ Sumar (1 Martini 🍸)</button>
+          </div>
+        </div>
+
+        <div id="slideServicios2" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-herramienta">
+            <h3>03. GONIÓMETRO</h3>
+            <img src="./img/Gonometro.png" alt="Goniometro">
+            <p>Evalúa la apertura estéreo y la fase para que ningún instrumento desaparezca en mono.</p>
+            <button type="button" class="btn-rojo" onclick="agregarHerramienta('Goniometro de Fase', 2)">+ Sumar (2 Martinis 🍸)</button>
+          </div>
+        </div>
+
+        <div id="slideServicios3" class="slide-carrusel oculto-movil">
+          <div class="tarjeta-herramienta">
+            <h3>04. FRECUENCIAS 3D</h3>
+            <img src="./img/Frecuencias.png" alt="Frecuencias">
+            <p>Traza un mapa en el tiempo para localizar resonancias y enmascaramiento entre sonidos.</p>
+            <button type="button" class="btn-rojo" onclick="agregarHerramienta('Espectrograma 3D', 3)">+ Sumar (3 Martinis 🍸)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="controles-carrusel-movil">
+        <button type="button" class="btn-rojo" onclick="cambiarSlideServicios(-1)">◀ Anterior</button>
+        <span id="contadorCarruselServicios">1 / 4</span>
+        <button type="button" class="btn-rojo" onclick="cambiarSlideServicios(1)">Siguiente ▶</button>
+      </div>
+    </section>
+
+    <!-- Orden de Diagnostico Acustico -->
+    <section class="caja-orden">
+      <h3>Tu Orden de Diagnóstico (<span id="contadorHerramientas">0 / 4 Módulos</span> — <span id="totalMartinis">0 Martinis 🍸</span>)</h3>
+      <p id="mensajeOrden">Seleccioná arriba qué herramientas querés incluir en tu sesión.</p>
+      <ul id="listaHerramientasElegidas" class="lista-simple">
+        <li>Todavía no agregaste ninguna herramienta.</li>
+      </ul>
+      <div class="fila-botones">
+        <button type="button" class="btn-gris" onclick="quitarUltimaHerramienta()">Quitar última</button>
+        <button type="button" class="btn-rojo" onclick="confirmarSesionAuditoria()">Confirmar Sesión</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer con datos esenciales -->
+  <footer class="footer-estudio">
+    <div class="footer-columnas">
+      <div class="footer-col">
+        <h4>Brian Mix &amp; Martini's</h4>
+        <p class="footer-bio">Estudio de auditoría acústica analógica y críticas sin anestesia en Quahog.</p>
+        <p class="footer-lema">"El sonido culto se bebe frío y con dos aceitunas."</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h4>Secciones</h4>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="historia.html">Historia</a>
+        <a href="PDLV.html">PDLV</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto &amp; Horarios</h4>
+        <p>📍 Spooner Street 31, Quahog, Rhode Island</p>
+        <p>📧 contacto@brianmixmartinis.com</p>
+        <p>📞 Tel: +1 (401) 555-0199 | 🍸 Lun a Vie 14 a 20 hs</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Brian Mix &amp; Martini's Studio. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="./funciones.js"></script>
+</body>
+</html>
